@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/FadeOutDemo/v16
+/FadeOutDemo/bin/Debug
+/FadeOutDemo/obj/Debug
