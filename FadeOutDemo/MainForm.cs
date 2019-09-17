@@ -9,11 +9,28 @@ namespace FadeOutDemo
         public MainForm()
         {
             InitializeComponent();
+            Controls.Add(mainLabel);
+            Controls.Add(_panel);
+            _panel.Controls.Add(_panel1);
             mainLabel.ForeColor = Color.Black;
             Reset();
         }
 
         readonly ToolTip _tooltip = new ToolTip();
+        private Panel _panel = new Panel()
+        {
+            BackColor = Color.Red,
+            Location = new Point(0, 0),
+            Size = new Size(171, 60)
+        };
+
+        private Panel _panel1 = new Panel()
+        {
+            BackColor = Color.Yellow,
+            Location = new Point(50, 20),
+            Size = new Size(100, 30)
+        };
+
 
         private void StartButtonClick(object sender, EventArgs e)
         {

@@ -9,22 +9,12 @@ namespace FadeOutDemo
     {
         public FadeOutLabel()
         {
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw , true);
             _fadeoutTimer.Interval = 1500;
             _fadeoutTimer.Tick += StartAnimation;
 
             _animationTimer.Interval = 25;
             _animationTimer.Tick += AnimationFrame;
-        }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                var param = base.CreateParams;
-                param.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT = 0x00000020
-                return param;
-            }
         }
 
         Timer _fadeoutTimer = new Timer();
@@ -60,6 +50,22 @@ namespace FadeOutDemo
 
         public decimal StepAcceleration { get; set; }
 
+        protected override void OnPaintBackground(PaintEventArgs pevent)
+        {
+            if (Parent != null)
+            {
+                using (var behind = new Bitmap(Parent.Width, Parent.Height))
+                {
+
+                    foreach (Control c in Parent.Controls)
+                        if (c.Bounds.IntersectsWith(Bounds) & c != this)
+                            c.DrawToBitmap(behind, c.Bounds);
+
+                    pevent.Graphics.DrawImage(behind, -Left, -Top);
+                }
+            }
+        }
+
         #endregion
 
         protected override void OnPaint(PaintEventArgs e)
@@ -70,8 +76,9 @@ namespace FadeOutDemo
             {
                 grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
                 grfx.Clear(BackColor);
-                var args = new PaintEventArgs(grfx, e.ClipRectangle);
-                base.OnPaint(args);
+                int x = Padding.Left + Margin.Left;
+                int y = Padding.Top + Margin.Top;
+                grfx.DrawString(Text, Font, new SolidBrush(ForeColor), new Point(x, y));
             }
 
             short a = BackColor.A;
