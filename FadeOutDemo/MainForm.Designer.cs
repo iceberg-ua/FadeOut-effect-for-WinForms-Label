@@ -33,19 +33,22 @@
             this.stepTrackBar = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.delayTrackBar = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.accTrackBar = new System.Windows.Forms.TrackBar();
             this.intervalTrackBar = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
-            this.mainLabel = new FadeOutDemo.CustomLabel();
+            this.mainLabel = new FadeOutDemo.FadeOutLabel();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.opacityTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stepTrackBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delayTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intervalTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -73,14 +76,15 @@
             // 
             // stepTrackBar
             // 
-            this.stepTrackBar.Location = new System.Drawing.Point(6, 42);
+            this.stepTrackBar.LargeChange = 2;
+            this.stepTrackBar.Location = new System.Drawing.Point(6, 100);
             this.stepTrackBar.Minimum = 1;
             this.stepTrackBar.Name = "stepTrackBar";
             this.stepTrackBar.Size = new System.Drawing.Size(289, 45);
             this.stepTrackBar.TabIndex = 3;
             this.stepTrackBar.Value = 1;
             this.stepTrackBar.Scroll += new System.EventHandler(this.TrackBarScroll);
-            this.stepTrackBar.ValueChanged += new System.EventHandler(this.StepTrackBarValueChanged);
+            this.stepTrackBar.ValueChanged += new System.EventHandler(this.Reset);
             // 
             // groupBox1
             // 
@@ -94,6 +98,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.delayTrackBar);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -102,15 +108,38 @@
             this.groupBox2.Controls.Add(this.stepTrackBar);
             this.groupBox2.Location = new System.Drawing.Point(12, 150);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(301, 220);
+            this.groupBox2.Size = new System.Drawing.Size(301, 285);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fade out animation settings";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(198, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Animation delay (100 - 3000 miliseconds)";
+            // 
+            // delayTrackBar
+            // 
+            this.delayTrackBar.LargeChange = 500;
+            this.delayTrackBar.Location = new System.Drawing.Point(6, 34);
+            this.delayTrackBar.Maximum = 3000;
+            this.delayTrackBar.Minimum = 100;
+            this.delayTrackBar.Name = "delayTrackBar";
+            this.delayTrackBar.Size = new System.Drawing.Size(289, 45);
+            this.delayTrackBar.SmallChange = 100;
+            this.delayTrackBar.TabIndex = 9;
+            this.delayTrackBar.Value = 100;
+            this.delayTrackBar.Scroll += new System.EventHandler(this.TrackBarScroll);
+            this.delayTrackBar.ValueChanged += new System.EventHandler(this.Reset);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 85);
+            this.label4.Location = new System.Drawing.Point(6, 149);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(192, 13);
             this.label4.TabIndex = 8;
@@ -119,7 +148,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 149);
+            this.label3.Location = new System.Drawing.Point(6, 213);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(160, 13);
             this.label3.TabIndex = 7;
@@ -128,7 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 26);
+            this.label2.Location = new System.Drawing.Point(6, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 13);
             this.label2.TabIndex = 6;
@@ -136,7 +165,8 @@
             // 
             // accTrackBar
             // 
-            this.accTrackBar.Location = new System.Drawing.Point(6, 101);
+            this.accTrackBar.LargeChange = 2;
+            this.accTrackBar.Location = new System.Drawing.Point(6, 165);
             this.accTrackBar.Maximum = 20;
             this.accTrackBar.Minimum = 10;
             this.accTrackBar.Name = "accTrackBar";
@@ -144,11 +174,11 @@
             this.accTrackBar.TabIndex = 5;
             this.accTrackBar.Value = 10;
             this.accTrackBar.Scroll += new System.EventHandler(this.TrackBarScroll);
-            this.accTrackBar.ValueChanged += new System.EventHandler(this.AccTrackBarValueChanged);
+            this.accTrackBar.ValueChanged += new System.EventHandler(this.Reset);
             // 
             // intervalTrackBar
             // 
-            this.intervalTrackBar.Location = new System.Drawing.Point(6, 168);
+            this.intervalTrackBar.Location = new System.Drawing.Point(6, 232);
             this.intervalTrackBar.Maximum = 50;
             this.intervalTrackBar.Minimum = 5;
             this.intervalTrackBar.Name = "intervalTrackBar";
@@ -156,7 +186,7 @@
             this.intervalTrackBar.TabIndex = 4;
             this.intervalTrackBar.Value = 5;
             this.intervalTrackBar.Scroll += new System.EventHandler(this.TrackBarScroll);
-            this.intervalTrackBar.ValueChanged += new System.EventHandler(this.IntervalTrackBarValueChanged);
+            this.intervalTrackBar.ValueChanged += new System.EventHandler(this.Reset);
             // 
             // button2
             // 
@@ -168,22 +198,30 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.ResetButtonClick);
             // 
-            // label1
+            // mainLabel
             // 
+            this.mainLabel.AnimationFrameInterval = 25;
             this.mainLabel.AutoSize = true;
-            this.mainLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.mainLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.mainLabel.FadeoutStep = 0;
+            this.mainLabel.FadeOutTimerInterval = 1500;
             this.mainLabel.Font = new System.Drawing.Font("Arial Black", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.mainLabel.Location = new System.Drawing.Point(12, 9);
-            this.mainLabel.Name = "label1";
+            this.mainLabel.Name = "mainLabel";
             this.mainLabel.Padding = new System.Windows.Forms.Padding(20, 4, 20, 4);
             this.mainLabel.Size = new System.Drawing.Size(171, 60);
+            this.mainLabel.StepAcceleration = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.mainLabel.TabIndex = 1;
             this.mainLabel.Text = "TEST";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 376);
+            this.button3.Location = new System.Drawing.Point(12, 441);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 23);
             this.button3.TabIndex = 7;
@@ -193,7 +231,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(167, 376);
+            this.button4.Location = new System.Drawing.Point(167, 441);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(147, 23);
             this.button4.TabIndex = 8;
@@ -201,11 +239,11 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.BackColorButtonClick);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 402);
+            this.ClientSize = new System.Drawing.Size(326, 467);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -214,7 +252,7 @@
             this.Controls.Add(this.mainLabel);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Fade Out Effect Demo";
             ((System.ComponentModel.ISupportInitialize)(this.opacityTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stepTrackBar)).EndInit();
@@ -222,6 +260,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delayTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intervalTrackBar)).EndInit();
             this.ResumeLayout(false);
@@ -232,7 +271,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private CustomLabel mainLabel;
+        private FadeOutLabel mainLabel;
         private System.Windows.Forms.TrackBar opacityTrackBar;
         private System.Windows.Forms.TrackBar stepTrackBar;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -245,6 +284,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TrackBar delayTrackBar;
+        private System.Windows.Forms.Label label1;
     }
 }
 
