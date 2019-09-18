@@ -17,6 +17,16 @@ namespace FadeOutDemo
             _animationTimer.Tick += AnimationFrame;
         }
 
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        var param = base.CreateParams;
+        //        param.ExStyle |= 0x00000020; //WS_EX_TRANSPARENT = 0x00000020
+        //        return param;
+        //    }
+        //}
+
         Timer _fadeoutTimer = new Timer();
         Timer _animationTimer = new Timer();
         decimal _currentStep;
@@ -52,6 +62,8 @@ namespace FadeOutDemo
 
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
+            base.OnPaintBackground(pevent);
+
             if (Parent != null)
             {
                 using (var behind = new Bitmap(Parent.Width, Parent.Height))
