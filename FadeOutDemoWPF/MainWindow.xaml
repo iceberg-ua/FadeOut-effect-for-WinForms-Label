@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FadeOutDemoWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="600" Background="Bisque">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<local:FadeOutLabel x:Name="MainLabel" Background="Blue" Foreground="White" FontWeight="Black" Height="20" Width="Auto" Padding="5,0,5,0" 
+               HorizontalAlignment="Left" VerticalAlignment="Bottom">Jived fox nymph grabs quick waltz.</local:FadeOutLabel>-->
+        <WindowsFormsHost Name="WinHost"></WindowsFormsHost>
+        <WindowsFormsHost Name="LabelHost" Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Column="1">
+            <Button Padding="0,8,0,8" Click="Button_Click">Start Anitmation</Button>
+        </StackPanel>
     </Grid>
 </Window>

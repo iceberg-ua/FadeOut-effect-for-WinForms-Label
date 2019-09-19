@@ -86,7 +86,7 @@ namespace FadeOutDemo
             {
                 using (var grfx = Graphics.FromImage(bmp))
                 {
-                    //grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit; //only this helps
+                    //grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias; //only this helps
                     grfx.Clear(BackColor);
                     int x = Padding.Left + Margin.Left;
                     int y = Padding.Top + Margin.Top;
