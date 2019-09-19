@@ -205,11 +205,11 @@
             this.mainLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.mainLabel.FadeoutStep = 0;
             this.mainLabel.FadeOutTimerInterval = 1500;
-            this.mainLabel.Font = new System.Drawing.Font("Arial Black", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainLabel.Font = new System.Drawing.Font("Roboto", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.mainLabel.Location = new System.Drawing.Point(12, 9);
+            this.mainLabel.Location = new System.Drawing.Point(2, 9);
             this.mainLabel.Name = "mainLabel";
-            this.mainLabel.Padding = new System.Windows.Forms.Padding(20, 4, 20, 4);
+            this.mainLabel.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.mainLabel.Size = new System.Drawing.Size(171, 60);
             this.mainLabel.StepAcceleration = new decimal(new int[] {
             0,
@@ -217,7 +217,7 @@
             0,
             0});
             this.mainLabel.TabIndex = 1;
-            this.mainLabel.Text = "TEST";
+            this.mainLabel.Text = "Jived fox nymph grabs quick waltz.";
             // 
             // button3
             // 

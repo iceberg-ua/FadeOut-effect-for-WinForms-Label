@@ -12,7 +12,7 @@ namespace FadeOutDemo
             Controls.Add(mainLabel);
             Controls.Add(_panel);
             _panel.Controls.Add(_panel1);
-            mainLabel.ForeColor = Color.Black;
+            mainLabel.ForeColor = Color.White;
             Reset();
         }
 

@@ -82,34 +82,35 @@ namespace FadeOutDemo
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var bmp = new Bitmap(Width, Height, PixelFormat.Format32bppPArgb);
-
-            using (var grfx = Graphics.FromImage(bmp))
+            using (var bmp = new Bitmap(Width, Height, PixelFormat.Format32bppPArgb))
             {
-                grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-                grfx.Clear(BackColor);
-                int x = Padding.Left + Margin.Left;
-                int y = Padding.Top + Margin.Top;
-                grfx.DrawString(Text, Font, new SolidBrush(ForeColor), new Point(x, y));
-            }
-
-            short a = BackColor.A;
-
-            if (a != 255)
-            {
-                for (int y = 0; y < Height - 1; y++)
+                using (var grfx = Graphics.FromImage(bmp))
                 {
-                    for (int x = 0; x < Width - 1; x++)
-                    {
-                        var pxColor = bmp.GetPixel(x, y);
+                    //grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit; //only this helps
+                    grfx.Clear(BackColor);
+                    int x = Padding.Left + Margin.Left;
+                    int y = Padding.Top + Margin.Top;
+                    grfx.DrawString(Text, Font, new SolidBrush(ForeColor), new Point(x, y));
+                }
 
-                        if (pxColor.A != a)
-                            bmp.SetPixel(x, y, Color.FromArgb(a, pxColor));
+                short a = BackColor.A;
+
+                if (a != 255)
+                {
+                    for (int y = 0; y < Height - 1; y++)
+                    {
+                        for (int x = 0; x < Width - 1; x++)
+                        {
+                            var pxColor = bmp.GetPixel(x, y);
+
+                            if (pxColor.A != a)
+                                bmp.SetPixel(x, y, Color.FromArgb(a, pxColor));
+                        }
                     }
                 }
-            }
 
-            e.Graphics.DrawImage(bmp, 0, 0);
+                e.Graphics.DrawImage(bmp, 0, 0);
+            }
         }
 
         private void StartAnimation(object sender, EventArgs e)
