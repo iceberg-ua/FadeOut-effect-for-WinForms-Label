@@ -115,7 +115,7 @@ namespace FadeOutDemo
                     int x = Padding.Left + Margin.Left;
                     int y = Padding.Top + Margin.Top;
 
-                    grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit; //only this helps
+                    grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
                     grfx.FillRectangle(Background, new RectangleF(0, 0, Width, Height));
                     grfx.DrawString(Text, Font, new SolidBrush(ForeColor), new Point(x, y));
                 }
