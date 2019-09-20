@@ -28,18 +28,21 @@ namespace FadeOutDemoWPF
         {
             InitializeComponent();
             _owner = owner;
+
+            _anime.AccelerationRatio = .9;
+            _anime.BeginTime = new TimeSpan(0, 0, 2);
+            _anime.Completed += AnimeCompleted;
         }
+
+        private readonly DoubleAnimation _anime = new DoubleAnimation(1, 0, new Duration(new TimeSpan(5000000)));
 
         public void StartAnimation()
         {
             _owner.Visible = true;
             Visibility = Visibility.Visible;
-            Opacity = 0;
 
-            DoubleAnimation anime = new DoubleAnimation(1, 0, new Duration(new TimeSpan(5000000)));
-            anime.AccelerationRatio = .9;
-            anime.Completed += AnimeCompleted;
-            BeginAnimation(OpacityProperty, anime);
+            BeginAnimation(OpacityProperty, null);
+            BeginAnimation(OpacityProperty, _anime);
         }
 
         private void AnimeCompleted(object sender, EventArgs e)
