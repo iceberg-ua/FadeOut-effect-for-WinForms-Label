@@ -9,7 +9,9 @@ namespace FadeOutDemo
     {
         public FadeOutLabel()
         {
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw , true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
+            BackColor = Color.Transparent;
+
             _fadeoutTimer.Interval = 1500;
             _fadeoutTimer.Tick += StartAnimation;
 
@@ -41,6 +43,30 @@ namespace FadeOutDemo
                 Reset();
                 base.Text = value;
                 StartAnimation();
+            }
+        }
+
+        private int _opacity = 255;
+
+        public int Opacity
+        {
+            get { return _opacity; }
+            set
+            {
+                _opacity = value;
+                Invalidate();
+            }
+        }
+
+        private Brush _background = SystemBrushes.Control;
+
+        public Brush Background
+        {
+            get { return _background; }
+            set
+            {
+                _background = value;
+                Invalidate();
             }
         }
 
@@ -82,29 +108,28 @@ namespace FadeOutDemo
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            using (var bmp = new Bitmap(Width, Height, PixelFormat.Format32bppPArgb))
+            using (var bmp = new Bitmap(Width, Height))
             {
                 using (var grfx = Graphics.FromImage(bmp))
                 {
-                    //grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias; //only this helps
-                    grfx.Clear(BackColor);
                     int x = Padding.Left + Margin.Left;
                     int y = Padding.Top + Margin.Top;
+
+                    grfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit; //only this helps
+                    grfx.FillRectangle(Background, new RectangleF(0, 0, Width, Height));
                     grfx.DrawString(Text, Font, new SolidBrush(ForeColor), new Point(x, y));
                 }
 
-                short a = BackColor.A;
-
-                if (a != 255)
+                if (Opacity != 255)
                 {
-                    for (int y = 0; y < Height - 1; y++)
+                    for (int y = 0; y < Height; y++)
                     {
-                        for (int x = 0; x < Width - 1; x++)
+                        for (int x = 0; x < Width; x++)
                         {
                             var pxColor = bmp.GetPixel(x, y);
 
-                            if (pxColor.A != a)
-                                bmp.SetPixel(x, y, Color.FromArgb(a, pxColor));
+                            if (pxColor.A != Opacity)
+                                bmp.SetPixel(x, y, Color.FromArgb(Opacity, pxColor));
                         }
                     }
                 }
@@ -122,9 +147,7 @@ namespace FadeOutDemo
 
         private void AnimationFrame(object sender, EventArgs e)
         {
-            var a = BackColor.A;
-
-            if (a == 0)
+            if (Opacity == 0)
             {
                 Visible = false;
                 _animationTimer.Stop();
@@ -132,7 +155,7 @@ namespace FadeOutDemo
 
             if (Visible)
             {
-                BackColor = Color.FromArgb(Math.Max(a - (int)Math.Round(_currentStep), 0), BackColor);
+                Opacity = Math.Max(Opacity - (int)Math.Round(_currentStep), 0);
                 _currentStep *= StepAcceleration / 10;
             }
         }
@@ -147,7 +170,7 @@ namespace FadeOutDemo
             _animationTimer.Stop();
             _fadeoutTimer.Stop();
 
-            BackColor = Color.FromArgb(255, BackColor);
+            Opacity = 255;
         }
     }
 }

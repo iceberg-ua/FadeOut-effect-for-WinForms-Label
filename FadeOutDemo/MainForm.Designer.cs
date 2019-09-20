@@ -202,7 +202,6 @@
             // 
             this.mainLabel.AnimationFrameInterval = 25;
             this.mainLabel.AutoSize = true;
-            this.mainLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.mainLabel.FadeoutStep = 0;
             this.mainLabel.FadeOutTimerInterval = 1500;
             this.mainLabel.Font = new System.Drawing.Font("Roboto", 10, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

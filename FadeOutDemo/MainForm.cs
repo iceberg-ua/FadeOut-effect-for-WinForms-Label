@@ -45,7 +45,7 @@ namespace FadeOutDemo
 
         private void OpacityTrackBarValueChanged(object sender, EventArgs e)
         {
-            mainLabel.BackColor = Color.FromArgb(opacityTrackBar.Value, mainLabel.BackColor);
+            mainLabel.Opacity = opacityTrackBar.Value;
         }
 
         private void TrackBarScroll(object sender, EventArgs e)
@@ -86,7 +86,7 @@ namespace FadeOutDemo
 
                 if (result == DialogResult.OK)
                 {
-                    mainLabel.BackColor = clrDlg.Color;
+                    mainLabel.Background = new SolidBrush(clrDlg.Color);
                 }
             }
         }
